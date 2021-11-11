@@ -1,0 +1,35 @@
+.titulo{
+    color: rgb(9, 55, 139);
+    font-family: sans-serif;
+    font-size: 36px;
+    font-weight: 600;
+    margin-top: 30px;
+}
+
+.contenedor{
+    .input{
+        justify-content: space-between;
+        background: #ecf0f3;
+        height: 50px;
+        font-size: 14px;
+        border-radius: 50px;
+        margin-top: 10px;
+    }
+
+    .button {
+        margin-top: 10px;
+        background-color: transparent;
+        color: #0098d3;
+        border-color: #0098d3;
+        border-radius: 50px;
+    
+        &:hover,
+        &:active,
+        &:focus {
+          background-color: #0098d3 !important;
+          border-color: #0098d3;
+          color: #fff;
+          box-shadow: none !important;
+        }
+    }
+}

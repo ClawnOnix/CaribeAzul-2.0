@@ -1,0 +1,74 @@
+.App {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .table{
+    margin-top: 10px;
+    text-align: center;
+    border-left: 1px solid rgb(0, 0, 0);
+    border-top: 1px solid rgb(0, 0, 0);
+    border-right: 1px solid rgb(0, 0, 0);
+    th{
+      width: fit-content;
+      align-items: center;
+      border-bottom: 1px solid rgb(131, 129, 129);
+    }
+    tr{
+      border-bottom: 1px solid rgb(131, 129, 129);
+    }
+    td{
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      height: 49.5px;
+    }
+  }
+  
+  .information {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  
+  }
+  
+  input {
+    width: 300px;
+    height: 50px;
+    font-size: 20px;
+    padding-left: 10px;
+    margin: 5px;
+  
+  }
+  
+   button {
+    width: 320px;
+    height: 50px;
+    margin-top: 15px;
+  } 
+  
+   button:hover {
+    cursor: pointer;
+  }
+  
+  .employees {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .employee {
+    width: 700px;
+    height: auto;
+    border: 1px solid black;
+    margin: 10px;
+    display: flex;
+    padding: 10px;
+    font-family: 'Courier New', Courier, monospace;
+  }
+  
+  .employee h3 {
+    margin: 20px;
+  }
