@@ -15,7 +15,7 @@ export default function Login() {
             password: password
         }).then((res) => {
             if (res.status === 200){
-                history.push("/Home")
+                console.log(res)
             }
 else{ console.log(res)}
         });

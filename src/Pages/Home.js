@@ -10,7 +10,7 @@ function Home() {
   useEffect(() => {
     Axios.get("https://caribeazul-backend-4w2sk.ondigitalocean.app/login").then((response) => {
       if (response.data.loggedIn === false) {
-        history.push("/sign-in")
+        // history.push("/sign-in")
       }
     });
   }, []);
