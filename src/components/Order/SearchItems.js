@@ -47,7 +47,7 @@ export default function SearchItems(props) {
     const classes = useStyles();
 
     useEffect(() => {
-        Axios.get("https://caribeazul-backend-4w2sk.ondigitalocean.app/productlist").then(res => {
+        Axios.get("https://caribeazul-backend-muvy3.ondigitalocean.app/productlist").then(res => {
                 setItems(res.data);
                 setSearchList(res.data);
             })

@@ -6,12 +6,12 @@ import DeleteOutlineTwoToneIcon from '@material-ui/icons/DeleteOutlineTwoTone';
 
 export default function OrderList(props) {
 
-    const { setOrderId, setOrderListVisibility, resetFormControls, setNotify } = props;
+    const { setOrderId, setOrderListVisibility } = props;
 
     const [orderList, setOrderList] = useState([]);
 
     useEffect(() => {
-        Axios.get("https://caribeazul-backend-4w2sk.ondigitalocean.app/orderlist").then(res => {
+        Axios.get("https://caribeazul-backend-muvy3.ondigitalocean.app/orderlist").then(res => {
                 setOrderList(res.data)
             })
             .catch(err => console.log(err))
@@ -22,17 +22,6 @@ export default function OrderList(props) {
         setOrderListVisibility(false);
     }
 
-    const deleteOrder = id => {
-        if (window.confirm('Estas seguro que quieres eliminar este record?')) {
-            Axios.delete(`https://caribeazul-backend-4w2sk.ondigitalocean.app/deleteorder/${id}`).then(res => {
-                    setOrderListVisibility(false);
-                    setOrderId(0);
-                    resetFormControls();
-                    setNotify({ isOpen: true, message: 'Deleted successfully.' });
-                })
-                .catch(err => console.log(err))
-        }
-    }
 
     return (
         <>
@@ -43,7 +32,7 @@ export default function OrderList(props) {
                         <TableCell>Cliente</TableCell>
                         <TableCell>Pagado con:</TableCell>
                         <TableCell>Total</TableCell>
-                        <TableCell></TableCell>
+                        <TableCell>Status</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -66,10 +55,9 @@ export default function OrderList(props) {
                                     onClick={e => showForUpdate(item.id)}>
                                     {item.total}
                                 </TableCell>
-                                <TableCell>
-                                    <DeleteOutlineTwoToneIcon
-                                        color="secondary"
-                                        onClick={e => deleteOrder(item.id)} />
+                                <TableCell
+                                onClick={e => showForUpdate(item.id)}>
+                                    {item.status}
                                 </TableCell>
 
                             </TableRow>

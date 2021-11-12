@@ -10,7 +10,7 @@ export default function Login() {
     const [password, setPassword] = useState("");
 
     function logUser()  {
-        Axios.post("https://caribeazul-backend-4w2sk.ondigitalocean.app/login", {
+        Axios.post("https://caribeazul-backend-muvy3.ondigitalocean.app/login", {
             username: username,
             password: password
         }).then((res) => {

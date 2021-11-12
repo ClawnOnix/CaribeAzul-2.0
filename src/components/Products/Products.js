@@ -13,7 +13,7 @@ export default function Products(props) {
   const [loading, setLoading] = useState(true);
 
   const getProduct =  () => {
-    Axios.get("https://caribeazul-backend-4w2sk.ondigitalocean.app/productlist").then((response) => {
+    Axios.get("https://caribeazul-backend-muvy3.ondigitalocean.app/productlist").then((response) => {
       setResult(response.data);
       setLoading(false);
       });
@@ -32,7 +32,7 @@ export default function Products(props) {
 
  function deleteProduct(id){
   
-  Axios.delete(`https://caribeazul-backend-4w2sk.ondigitalocean.app/deleteproduct/${id}`).then(() => {
+  Axios.delete(`https://caribeazul-backend-muvy3.ondigitalocean.app/deleteproduct/${id}`).then(() => {
      toast.error("Se ha eliminado el producto");
      window.location.reload();
   });

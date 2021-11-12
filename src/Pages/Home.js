@@ -8,7 +8,7 @@ import { useHistory } from "react-router-dom";
 function Home() {
   const history = useHistory();
   useEffect(() => {
-    Axios.get("https://caribeazul-backend-4w2sk.ondigitalocean.app/login").then((response) => {
+    Axios.get("https://caribeazul-backend-muvy3.ondigitalocean.app/login").then((response) => {
       if (response.data.loggedIn === false) {
         // history.push("/sign-in")
       }

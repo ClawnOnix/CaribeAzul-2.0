@@ -9,11 +9,11 @@ export default function FeaturedInfo() {
   const [result, setResult] = useState([]);
 
   useEffect(() => {
-    Axios.get("https://caribeazul-backend-4w2sk.ondigitalocean.app/orderlist").then(res => {
+    Axios.get("https://caribeazul-backend-muvy3.ondigitalocean.app/orderlist").then(res => {
       setValues(res.data);
     }).catch(err => console.log(err))
 
-    Axios.get("https://caribeazul-backend-4w2sk.ondigitalocean.app/productlist").then((response) => {
+    Axios.get("https://caribeazul-backend-muvy3.ondigitalocean.app/productlist").then((response) => {
       setResult(response.data);
       console.log(result)
       }).catch(err => console.log(err))
@@ -51,18 +51,23 @@ export default function FeaturedInfo() {
       <div className="featuredItem">
         <span className="featuredTitle">Venta general</span>
         <div className="featuredMoneyContainer">
-          <span className="featuredMoney">${sumarize().toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</span>
+          <span className="featuredMoney">${sumarize().toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
+          {
+            sumarize().toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') < invSumarize().toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') ?
+            <ArrowDownward className="featuredIcon negative"/> :
+            <ArrowUpward className="featuredIcon positive"/>
+          }</span>
         </div>
+        <span className="featuredSub">Comparado con el inventario.</span>
       </div>
       <div className="featuredItem">
         <span className="featuredTitle">Venta actual</span>
         <div className="featuredMoneyContainer">
           <span className="featuredMoney">${sumarize().toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</span>
           <span className="featuredMoneyRate">
-          DOP <ArrowDownward className="featuredIcon negative"/>
+          DOP 
           </span>
         </div>
-        <span className="featuredSub">Comparado con el mes anterior.</span>
       </div>
       <div className="featuredItem">
         <span className="featuredTitle">Costo de Inventario</span>

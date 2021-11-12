@@ -59,7 +59,7 @@ export default function OrderForm(props) {
     useEffect(() => {
         if (orderId === 0) resetFormControls()
         else {
-            Axios.get("https://caribeazul-backend-4w2sk.ondigitalocean.app/orderlist").then(res => {
+            Axios.get("https://caribeazul-backend-muvy3.ondigitalocean.app/orderlist").then(res => {
                     setValues(res.data);
                     setErrors({});
                 })
@@ -91,11 +91,12 @@ export default function OrderForm(props) {
         })
         if (validateForm()) {
             if (values.orderMasterId === 0) {
-                Axios.post("https://caribeazul-backend-4w2sk.ondigitalocean.app/neworder", {
+                Axios.post("https://caribeazul-backend-muvy3.ondigitalocean.app/neworder", {
                     customer: values.customer,
                     pMethod: values.pMethod,
                     total:  values.gTotal,
-                    date: values.Date
+                    date: values.Date,
+                    status: "normal"
                 }).then(res => {
                         resetFormControls();
                         setNotify({isOpen:true, message:'Se ha creado la nueva orden'});
@@ -103,11 +104,12 @@ export default function OrderForm(props) {
                     .catch(err => console.log(err));
             }
             else {
-                Axios.put("https://caribeazul-backend-4w2sk.ondigitalocean.app/updateorder",{
+                Axios.put("https://caribeazul-backend-muvy3.ondigitalocean.app/updateorder",{
                     id: values.id,
                     customer: values.customer,
                     pMethod: values.pMethod,
                     total:  values.gTotal,
+                    modified: "Actualizada"
                 }).then(res => {
                         setOrderId(0);
                         setNotify({isOpen:true, message:'La orden ha sido actualizada'});
@@ -197,7 +199,7 @@ export default function OrderForm(props) {
                 openPopup={orderListVisibility}
                 setOpenPopup={setOrderListVisibility}>
                 <OrderList
-                    {...{ setOrderId, setOrderListVisibility,resetFormControls,setNotify }} />
+                    {...{ setOrderId, setOrderListVisibility}} />
             </Popup>
             <Notification
                 {...{ notify, setNotify }} />

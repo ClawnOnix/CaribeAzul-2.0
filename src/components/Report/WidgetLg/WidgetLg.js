@@ -9,7 +9,7 @@ export default function WidgetLg() {
   const [values, setValues] = useState([]);
 
   useEffect(() => {
-    Axios.get("https://caribeazul-backend-4w2sk.ondigitalocean.app/orderlist").then(res => {
+    Axios.get("https://caribeazul-backend-muvy3.ondigitalocean.app/orderlist").then(res => {
       setValues(res.data);
     })
       .catch(err => console.log(err))
@@ -36,9 +36,7 @@ export default function WidgetLg() {
               </td>
               <td className="widgetLgDate">{item.date}</td>
               <td className="widgetLgAmount">{item.total}</td>
-              <td className="widgetLgStatus">
-                <Button enabled={false} type="Approvado" />
-              </td>
+              <td className="widgetLgStatus">{item.status}</td>
             </tr>);
           })
         }

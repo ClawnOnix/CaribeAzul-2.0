@@ -10,7 +10,7 @@ export default function Order() {
     const [order, setOrder] = useState(1)
 
     useEffect(() => {
-        Axios.get("https://caribeazul-backend-4w2sk.ondigitalocean.app/orderlist").then(res => {
+        Axios.get("https://caribeazul-backend-muvy3.ondigitalocean.app/orderlist").then(res => {
             if(res.data.id > 1){
                 setOrder(res.data)
             }

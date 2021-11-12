@@ -22,7 +22,7 @@ function Team() {
 
   
   function addUser() {
-    Axios.post("https://caribeazul-backend-4w2sk.ondigitalocean.app/register", {
+    Axios.post("https://caribeazul-backend-muvy3.ondigitalocean.app/register", {
       username: username,
       password: password,
       role: role 
@@ -39,13 +39,13 @@ function Team() {
   };
 
   function getUser() {
-    Axios.get("https://caribeazul-backend-4w2sk.ondigitalocean.app/userlist").then((response) => {
+    Axios.get("https://caribeazul-backend-muvy3.ondigitalocean.app/userlist").then((response) => {
       setUserList(response.data);
     });
   };
 
   function updateUser(id){
-  Axios.put(`https://caribeazul-backend-4w2sk.ondigitalocean.app/delete/${id}`).then((response) => {
+  Axios.put(`https://caribeazul-backend-muvy3.ondigitalocean.app/delete/${id}`).then((response) => {
       setUserList(
         userList.filter((val) => {
           return val.id !== id;
@@ -55,7 +55,7 @@ function Team() {
   }
 
   function deleteUser(id) {
-    Axios.delete(`https://caribeazul-backend-4w2sk.ondigitalocean.app/deleteuser/${id}`).then((response) => {
+    Axios.delete(`https://caribeazul-backend-muvy3.ondigitalocean.app/deleteuser/${id}`).then((response) => {
       setUserList(
         userList.filter((val) => {
           return val.id !== id;
