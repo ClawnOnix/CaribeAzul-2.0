@@ -25,7 +25,7 @@ export default function Product(props) {
       <Card>
         <Card.Body>
           <Card.Title>{product.name}</Card.Title>
-          <Card.Img src={image.url} alt="https://cdn.pixabay.com/photo/2018/02/01/20/43/shopping-3124078_960_720.jpg" />
+          <Card.Img style={{width: "30px", height: "30px"}} src={image.url} alt="https://cdn.pixabay.com/photo/2018/02/01/20/43/shopping-3124078_960_720.jpg" />
           <Card.Text>{product.description}</Card.Text>
           <Card.Text>{product.quantity} Disp.</Card.Text>
           <Card.Text>{product.price.toFixed(2)} DOP / Unidad</Card.Text>

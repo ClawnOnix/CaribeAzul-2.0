@@ -11,9 +11,9 @@ function Reports() {
   const data =[]
   const history = useHistory();
   useEffect(() => {
-    Axios.get("https://caribeazul-backend-4w2sk.ondigitalocean.app/login").then((response) => {
-      if (response.data.loggedIn === false) {
-        // history.push("/sign-in")
+    Axios.get("https://caribeazul-backend-muvy3.ondigitalocean.app/login").then((response) => {
+      if (response.data.loggedIn === true) {
+        history.push("/sign-in")
       }
     });
   }, []);

@@ -11,8 +11,7 @@ export default function WidgetLg() {
   useEffect(() => {
     Axios.get("https://caribeazul-backend-muvy3.ondigitalocean.app/orderlist").then(res => {
       setValues(res.data);
-    })
-      .catch(err => console.log(err))
+    }).catch(err => console.log(err))
   }, []);
   return (
     <div className="widgetLg">
