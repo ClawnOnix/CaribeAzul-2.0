@@ -12,7 +12,7 @@ function Reports() {
   const history = useHistory();
   useEffect(() => {
     Axios.get("https://caribeazul-backend-muvy3.ondigitalocean.app/login").then((response) => {
-      if (response.data.loggedIn === true) {
+      if (response.data.loggedIn === false) {
         history.push("/sign-in")
       }
     });

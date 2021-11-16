@@ -11,12 +11,18 @@ export default function Product(props) {
   const [image, setImages] = useState([]);
 
   useEffect(() => {
-    const unmount = db.collection("albums")
+     db.collection("albums")
       .doc("inventory")
       .onSnapshot((doc) => {
-        setImages(doc.data().images !== undefined ? doc.data().images.filter(item => item.name === product.name) : [] || []);
+        let arrimg = doc.data().images.map(item => { 
+          if(item.name === product.name){
+            return item.url;
+          }
+          
+        });
+        const img = `${arrimg[1]}`
+        setImages(img);
       });
-      return unmount
   }, []);
   
   return (
@@ -25,7 +31,7 @@ export default function Product(props) {
       <Card>
         <Card.Body>
           <Card.Title>{product.name}</Card.Title>
-          <Card.Img style={{width: "30px", height: "30px"}} src={image.url} alt="https://cdn.pixabay.com/photo/2018/02/01/20/43/shopping-3124078_960_720.jpg" />
+          <Card.Img style={{width: "150px", height: "100px"}} src={image}  />
           <Card.Text>{product.description}</Card.Text>
           <Card.Text>{product.quantity} Disp.</Card.Text>
           <Card.Text>{product.price.toFixed(2)} DOP / Unidad</Card.Text>

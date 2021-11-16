@@ -187,7 +187,7 @@ export default function OrderForm(props) {
                         </ButtonGroup>
                         <Button
                             style={{width: "250px", marginLeft: "140px"}}
-                            size="normal"
+                            size="medium"
                             onClick={openListOfOrders}
                             startIcon={<ReorderIcon />}
                         >Ordenes</Button>
