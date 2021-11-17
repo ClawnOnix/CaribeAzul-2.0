@@ -2,21 +2,17 @@ import React, {useEffect} from "react";
 import { ToastContainer } from "react-toastify";
 import Team from "../components/Team/Team"
 import Navbar from '../components/SideBar/Navbar';
-import Axios from "axios"
 import { useHistory } from "react-router-dom";
 
 function CRUD() {
   const history = useHistory();
   useEffect(() => {
-    Axios.get("https://caribeazul-backend-muvy3.ondigitalocean.app/login").then((response) => {
-      if (response.data.loggedIn === false) {
-
-      }//valide permiso 
-     // else if(response.data.loggedIn === false){
-//
-     // }
-    });
-  }, []);
+    let data = JSON.parse(sessionStorage.getItem('user'));
+    if(!data) {
+      history.push("/sign-in");
+    }
+    console.log(data)
+}, []);
   return (
     <div>
       <Navbar />

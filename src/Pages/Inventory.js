@@ -4,7 +4,6 @@ import Products from "../components/Products";
 import { STORAGE_PRODUCTS_CART } from "../Utils/constants";
 import NewProduct from "../components/AddProduct";
 import Navbar from '../components/SideBar/Navbar';
-import Axios from "axios"
 import { useHistory } from "react-router-dom";
 
 function Inventory() {
@@ -13,11 +12,11 @@ function Inventory() {
 
   const history = useHistory();
   useEffect(() => {
-    Axios.get("https://caribeazul-backend-muvy3.ondigitalocean.app/login").then((response) => {
-      if (response.data.loggedIn === false) {
-        // history.push("/sign-in")
+      let data = JSON.parse(sessionStorage.getItem('user'));
+      if(!data) {
+        history.push("/sign-in");
       }
-    });
+      console.log(data)
   }, []);
 
   useEffect(() => {

@@ -14,8 +14,10 @@ export default function Login() {
             username: username,
             password: password
         }).then((res) => {
+            console.log(res)
             if (res.status === 200){
-                localStorage.setItem("user", JSON.stringify(res.data));
+                sessionStorage.setItem("user", JSON.stringify(res.data));
+                history.push("/home")
             }
             else{ console.log(res)}
         });

@@ -8,12 +8,12 @@ import { useHistory } from "react-router-dom";
 function Home() {
   const history = useHistory();
   useEffect(() => {
-    Axios.get("https://caribeazul-backend-muvy3.ondigitalocean.app/login").then((response) => {
-      if (response.data.loggedIn === false) {
-        // history.push("/sign-in")
-      }
-    });
-  }, []);
+    let data = JSON.parse(sessionStorage.getItem('user'));
+    if(!data) {
+      history.push("/sign-in");
+    }
+    console.log(data)
+}, []);
   return (
     <div>
       <Navbar />

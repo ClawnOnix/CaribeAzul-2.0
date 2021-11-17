@@ -11,6 +11,10 @@ function Navbar() {
 
   const showSidebar = () => setSidebar(!sidebar);
 
+  function logOff(){
+    sessionStorage.removeItem("user");
+  }
+
   return (
     <>
       <IconContext.Provider value={{ color: '#fff' }}>
@@ -28,12 +32,17 @@ function Navbar() {
             </li>
             {SidebarData.map((item, index) => {
               return (
-                <li key={index} className={item.cName}>
-                  <Link to={item.path}>
-                    {item.icon}
-                    <span>{item.title}</span>
-                  </Link>
-                </li>
+                 <li key={index} className={item.cName}>
+                   { item.path === '/sign-in' ?
+                <Link to={item.path} onClick={logOff}>
+                  {item.icon}
+                  <span>{item.title}</span>
+                </Link>:
+                <Link to={item.path}>
+                {item.icon}
+                <span>{item.title}</span>
+              </Link>}
+              </li> 
               );
             })}
           </ul>

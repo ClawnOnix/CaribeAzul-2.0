@@ -4,19 +4,18 @@ import Chart from "../components/Report/Chart/Chart";
 import FeaturedInfo from "../components/Report/FeaturedInfo/FeaturedInfo";
 import "./reports.css";
 import WidgetLg from "../components/Report/WidgetLg/WidgetLg";
-import Axios from "axios"
 import { useHistory } from "react-router-dom";
 
 function Reports() {
   const data =[]
   const history = useHistory();
   useEffect(() => {
-    Axios.get("https://caribeazul-backend-muvy3.ondigitalocean.app/login").then((response) => {
-      if (response.data.loggedIn === false) {
-        history.push("/sign-in")
-      }
-    });
-  }, []);
+    let data = JSON.parse(sessionStorage.getItem('user'));
+    if(!data) {
+      history.push("/sign-in");
+    }
+    console.log(data)
+}, []);
   
   return (
     <div>

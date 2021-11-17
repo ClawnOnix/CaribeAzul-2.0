@@ -1,4 +1,6 @@
 import "./chart.css";
+import React, {useState, useEffect} from "react";
+import Axios from "axios"
 import {
   LineChart,
   Line,
@@ -10,11 +12,20 @@ import {
 
 export default function Chart({ title, data, dataKey, grid }) {
 
+  const [orderList, setOrderList] = useState([]);
+
+  useEffect(() => {
+    Axios.get("https://caribeazul-backend-muvy3.ondigitalocean.app/orderlist").then(res => {
+            setOrderList(res.data)
+        })
+        .catch(err => console.log(err))
+}, [])
+
   return (
     <div className="chart">
       <h3 className="chartTitle">{title}</h3>
       <ResponsiveContainer width="100%" aspect={4 / 1}>
-        <LineChart data={data}>
+        <LineChart data={orderList}>
           <XAxis dataKey="name" stroke="#5550bd" />
           <Line type="monotone" dataKey={dataKey} stroke="#5550bd" />
           <Tooltip />
