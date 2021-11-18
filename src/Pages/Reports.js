@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import Navbar from '../components/SideBar/Navbar';
-import Chart from "../components/Report/Chart/Chart";
+import Detail from "../components/Report/Details/Details";
 import FeaturedInfo from "../components/Report/FeaturedInfo/FeaturedInfo";
 import "./reports.css";
 import WidgetLg from "../components/Report/WidgetLg/WidgetLg";
@@ -22,7 +22,7 @@ function Reports() {
     <Navbar />
     <div className="home">
       <FeaturedInfo />
-      <Chart data={data} title="Análisis de usuario" grid dataKey="Active User"/>
+      <Detail />
       <div className="homeWidgets">
         <WidgetLg/>
       </div>
