@@ -68,10 +68,10 @@ export default function Products(props) {
       <Input  style={{width: "50%", marginLeft: "10px"}} placeholder="Descripcion" Iprops={{style: { height: "40px", borderRadius: "10px"}}}  onChange={(e) => setDescription(e.target.value)}/>
       <Input  type="number" style={{width: "30%", marginTop:"15px"}} placeholder="Precio" Iprops={{style: { height: "40px", borderRadius: "10px"}}} onChange={(e) => setPrice(e.target.value)} />
       <Input  type="number" style={{width: "12%", marginLeft: "10px", marginTop:"15px"}} placeholder="cant." Iprops={{style: { height: "40px", borderRadius: "10px"}}}  onChange={(e) => setQuantity(e.target.value)} />
-      <input  type="file" style={{ width:"168px", marginLeft: "10px", backgroundColor: "##00FF40", marginTop:"18px"}} onChange={onFileChange}></input>
+      <input  type="file" style={{ width:"198px", marginLeft: "1px", backgroundColor: "##00FF40", marginTop:"16px"}} onChange={onFileChange}></input>
       <Button className="button" style={{width: "20%", marginLeft: "10px"}} startIcon={<AddIcon />} onClick={() => {addProducts( name , description, price, quantity )}}>añadir producto</Button>
       </div>
     </Container>
-  );
+  );    
 }
 
