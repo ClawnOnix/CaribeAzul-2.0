@@ -11,7 +11,6 @@ function CRUD() {
     if(!data) {
       history.push("/sign-in");
     }
-    console.log(data)
 }, []);
   return (
     <div>

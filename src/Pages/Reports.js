@@ -7,14 +7,12 @@ import WidgetLg from "../components/Report/WidgetLg/WidgetLg";
 import { useHistory } from "react-router-dom";
 
 function Reports() {
-  const data =[]
   const history = useHistory();
   useEffect(() => {
     let data = JSON.parse(sessionStorage.getItem('user'));
     if(!data) {
       history.push("/sign-in");
     }
-    console.log(data)
 }, []);
   
   return (

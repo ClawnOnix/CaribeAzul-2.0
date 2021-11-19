@@ -14,6 +14,7 @@ export default function Product(props) {
      db.collection("albums")
       .doc("inventory")
       .onSnapshot((doc) => {
+
         let arrimg = doc.data().images.map(item => { 
           if(item.name === product.name){
             return item.url;
@@ -23,6 +24,7 @@ export default function Product(props) {
         const img = `${arrimg[1]}`
         setImages(img);
       });
+
   }, []);
   
   return (

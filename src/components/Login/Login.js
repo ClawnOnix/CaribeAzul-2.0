@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./Login.scss"
 import Axios from "axios";
 import { useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
 
 
 export default function Login() {
@@ -14,12 +15,11 @@ export default function Login() {
             username: username,
             password: password
         }).then((res) => {
-            console.log(res)
             if (res.status === 200){
                 sessionStorage.setItem("user", JSON.stringify(res.data));
                 history.push("/home")
             }
-            else{ console.log(res)}
+            else{ toast.error(res)}
         });
     };
 

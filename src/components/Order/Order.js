@@ -5,6 +5,7 @@ import { Grid } from '@material-ui/core';
 import SearchItems from './SearchItems';
 import Orderedtems from './OrderedItems';
 import Axios from "axios"
+import { toast } from 'react-toastify';
 
 export default function Order() {
     const [order, setOrder] = useState(1)
@@ -15,7 +16,7 @@ export default function Order() {
                 setOrder(res.data)
             }
             })
-            .catch(err => console.log(err))
+            .catch(err => toast.error("Error al obtener Ordenes"))
     }, []);
 
     const getFreshModelObject = () => ({

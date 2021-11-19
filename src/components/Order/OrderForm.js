@@ -5,12 +5,12 @@ import { Input, Select, Button } from "../../Controls";
 import ReplayIcon from '@material-ui/icons/Replay';
 import ReorderIcon from '@material-ui/icons/Reorder';
 import Axios from "axios";
-import { roundTo2DecimalPoint } from "../../Utils/Utils";
+import { roundTo2DecimalPoint, timeNow } from "../../Utils/Utils";
 import Popup from '../../layouts/Popup';
 import OrderList from './OrderList';
 import Notification from "../../layouts/Notification";
-import { setTimeSent } from '../../Utils/Utils';
 import { pMethods } from '../../Utils/constants';
+import { toast } from 'react-toastify';
 
 
 const useStyles = makeStyles(theme => ({
@@ -63,7 +63,7 @@ export default function OrderForm(props) {
                     setValues(res.data);
                     setErrors({});
                 })
-                .catch(err => console.log(err))
+                .catch(err => toast.error("Error al obtener Ordenes!"))
         }
 
     }, [orderId]);
@@ -87,7 +87,7 @@ export default function OrderForm(props) {
         e.preventDefault();
         setValues({
             ...values,
-            date: setTimeSent()
+            date: timeNow()
         })
         if (validateForm()) {
             if (values.orderMasterId === 0) {
@@ -101,7 +101,7 @@ export default function OrderForm(props) {
                         resetFormControls();
                         setNotify({isOpen:true, message:'Se ha creado la nueva orden'});
                     })
-                    .catch(err => console.log(err));
+                    .catch(err => toast.error("Error al Crear orden"));
             }
             else {
                 Axios.put("https://caribeazul-backend-muvy3.ondigitalocean.app/updateorder",{
@@ -114,7 +114,7 @@ export default function OrderForm(props) {
                         setOrderId(0);
                         setNotify({isOpen:true, message:'La orden ha sido actualizada'});
                     })
-                    .catch(err => console.log(err));
+                    .catch(err => toast.error("Error al actualizar orden"));
             }
         }
 

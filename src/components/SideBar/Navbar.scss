@@ -1,19 +1,22 @@
 .navbar {
-  background-color: #060b26;
+  background: linear-gradient(to right, #4286f4, #373B44); 
+  
   height: 80px;
   display: flex;
   justify-content: start;
   align-items: center;
+  marker: none;
 }
 
 .menu-bars {
   margin-left: 2rem;
   font-size: 2rem;
   background: none;
+  marker: none;
 }
 
 .nav-menu {
-  background-color: #060b26;
+  background-color: #3F71C2;
   width: 250px;
   height: 100vh;
   justify-content: center;
@@ -22,11 +25,13 @@
   left: -100%;
   transition: 850ms;
   z-index: 10;
+  marker: none;
 }
 
 .nav-menu.active {
   left: 0;
   transition: 350ms;
+  marker: none;
 }
 
 .nav-text {
@@ -35,6 +40,7 @@
   padding: 8px 0px 8px 16px;
   list-style: none;
   height: 60px;
+  marker: none;
 }
 
 .nav-text a {
@@ -46,22 +52,29 @@
   align-items: center;
   padding: 0 16px;
   border-radius: 4px;
+  marker: none;
 }
 
 .nav-text a:hover {
   background-color: #1a83ff;
+  marker: none;
 }
 
 .nav-menu-items {
   width: 100%;
+  marker: none;
 }
 
 .navbar-toggle {
-  background-color: #060b26;
+  background-color: #3F71C2;
   width: 100%;
   height: 80px;
   justify-content: start;
   align-items: center;
+
+  ::marker{
+    color: #3F71C2
+  }
 }
 
 span {

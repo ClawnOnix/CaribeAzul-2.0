@@ -16,7 +16,7 @@ function Inventory() {
       if(!data) {
         history.push("/sign-in");
       }
-      console.log(data)
+
   }, []);
 
   useEffect(() => {

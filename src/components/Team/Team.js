@@ -45,12 +45,13 @@ function Team() {
   };
 
   function updateUser(id){
-  Axios.put(`https://caribeazul-backend-muvy3.ondigitalocean.app/delete/${id}`).then((response) => {
+  Axios.put(`https://caribeazul-backend-muvy3.ondigitalocean.app/update`).then((response) => {
       setUserList(
         userList.filter((val) => {
           return val.id !== id;
         })
       );
+      handleClose2()
     });
   }
 
@@ -103,6 +104,7 @@ function Team() {
                   <th>#</th>
                   <th>Nombre </th>
                   <th style={{alignSelf: "center"}}>Contraseña</th>
+                  <th>Rol</th>
                   <th style={{alignSelf: "center"}}>Editar / Eliminar</th>
                 </tr>
                 {
@@ -112,7 +114,8 @@ function Team() {
                     <tr key={index}>
                       <td>{user.id}</td>
                       <td>{user.username}</td>
-                      <td>****************</td>
+                      <td>***********</td>
+                      <td>{user.role}</td>
                       <td style={{ display: "inline-flex", alignContent: "center"}}>
                         <div className="edit" title="Edit" data-toggle="tooltip" type="button" onClick={() => {updateModal(user)}}><i className="material-icons">&#xE254;</i></div>
                         <div className="delete" title="Delete" type="button" data-toggle="tooltip" style={{ color: "red" }} onClick={() => {deleteUser(user.id)}}><i className="material-icons">&#xE872;</i></div>

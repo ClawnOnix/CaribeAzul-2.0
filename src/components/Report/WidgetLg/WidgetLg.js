@@ -1,17 +1,16 @@
-import "./widgetLg.css";
+import "./widgetLg.scss";
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
+import { toast } from "react-toastify";
+import { timeShow } from "../../../Utils/Utils";
 
 export default function WidgetLg() {
-  const Button = ({ type }) => {
-    return <button className={"widgetLgButton " + type}>{type}</button>;
-  };
   const [values, setValues] = useState([]);
 
   useEffect(() => {
     Axios.get("https://caribeazul-backend-muvy3.ondigitalocean.app/orderlist").then(res => {
       setValues(res.data);
-    }).catch(err => console.log(err))
+    }).catch(err => toast.error("Error al obtener Ordenes!"))
   }, []);
   return (
     <div className="widgetLg">
@@ -33,7 +32,7 @@ export default function WidgetLg() {
               <td className="widgetLgUser">
                 <span className="widgetLgName">{item.customer} </span>
               </td>
-              <td className="widgetLgDate">{item.date}</td>
+              <td className="widgetLgDate">{timeShow(item.date)}</td>
               <td className="widgetLgAmount">{item.total}</td>
               <td className="widgetLgStatus">{item.status}</td>
             </tr>);

@@ -12,7 +12,7 @@ function Home() {
     if(!data) {
       history.push("/sign-in");
     }
-    console.log(data)
+
 }, []);
   return (
     <div>

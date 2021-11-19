@@ -4,6 +4,7 @@ import { List, ListItem, ListItemText, Paper, InputBase, IconButton, makeStyles,
 import SearchTwoToneIcon from '@material-ui/icons/SearchTwoTone';
 import PlusOneIcon from '@material-ui/icons/PlusOne';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import { toast } from 'react-toastify';
 
 const useStyles = makeStyles(theme => ({
     searchPaper: {
@@ -51,7 +52,7 @@ export default function SearchItems(props) {
                 setItems(res.data);
                 setSearchList(res.data);
             })
-            .catch(err => console.log(err))
+            .catch(err => toast.error("Error al obtener Productos!"))
 
     }, [])
 

@@ -48,7 +48,6 @@ export default function Products(props) {
         quantity: quantity,
         price: price
       }).then( (res) =>{
-        console.log(res);
         onUpload(name);
         toast.success("El Producto se ha añadido");
       })

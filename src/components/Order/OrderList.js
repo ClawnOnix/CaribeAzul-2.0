@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Axios from "axios";
 import Table from "../../layouts/Table";
 import { TableHead, TableRow, TableCell, TableBody } from '@material-ui/core';
+import { toast } from 'react-toastify';
 
 export default function OrderList(props) {
 
@@ -13,7 +14,7 @@ export default function OrderList(props) {
         Axios.get("https://caribeazul-backend-muvy3.ondigitalocean.app/orderlist").then(res => {
                 setOrderList(res.data)
             })
-            .catch(err => console.log(err))
+            .catch(err => toast.error("Error al actualizar orden"))
     }, [])
 
     const showForUpdate = id => {
