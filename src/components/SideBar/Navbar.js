@@ -8,11 +8,15 @@ import { IconContext } from 'react-icons';
 
 function Navbar() {
   const [sidebar, setSidebar] = useState(false);
-
+  const [loading, setLoading] = useState(false)
   const showSidebar = () => setSidebar(!sidebar);
 
-  function logOff(){
+  function logOff() {
     sessionStorage.removeItem("user");
+  }
+  let data = JSON.parse(sessionStorage.getItem('user'));
+  if (data.rol !== "admin") {
+    setLoading(true);
   }
 
   return (
@@ -32,17 +36,22 @@ function Navbar() {
             </li>
             {SidebarData.map((item, index) => {
               return (
-                 <li key={index} className={item.cName}>
-                   { item.path === '/sign-in' ?
-                <Link to={item.path} onClick={logOff}>
-                  {item.icon}
-                  <span>{item.title}</span>
-                </Link>:
-                <Link to={item.path}>
-                {item.icon}
-                <span>{item.title}</span>
-              </Link>}
-              </li> 
+                <li key={index} className={item.cName}>
+                  {item.path === '/sign-in' ?
+                    <Link to={item.path} onClick={logOff}>
+                      {item.icon}
+                      <span>{item.title}</span>
+                    </Link> :
+                    item.path === '/team' && loading !== true ?
+                      <Link to={item.path}>
+                        {item.icon}
+                        <span>{item.title}</span>
+                      </Link> :
+                      <Link to={item.path}>
+                        {item.icon}
+                        <span>{item.title}</span>
+                      </Link>}
+                </li>
               );
             })}
           </ul>

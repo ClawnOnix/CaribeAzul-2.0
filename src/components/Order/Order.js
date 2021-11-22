@@ -22,7 +22,7 @@ export default function Order() {
     const getFreshModelObject = () => ({
         orderMasterId: 0,
         orderNumber: order.id,
-        customerId: 0,
+        customer: "",
         pMethod: 'none',
         gTotal: 0,
         deletedOrderItemIds: '',

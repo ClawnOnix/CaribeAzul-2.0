@@ -45,6 +45,7 @@ export default function OrderForm(props) {
 
 
     useEffect(() => {
+
         let gTotal = values.orderDetails.reduce((tempTotal, product) => {
             return tempTotal + (product.quantity * product.price);
         }, 0);
@@ -85,37 +86,35 @@ export default function OrderForm(props) {
 
     const submitOrder = e => {
         e.preventDefault();
-        setValues({
-            ...values,
-            date: timeNow()
-        })
+          let date = timeNow()
         if (validateForm()) {
-            if (values.orderMasterId === 0) {
                 Axios.post("https://caribeazul-backend-muvy3.ondigitalocean.app/neworder", {
                     customer: values.customer,
                     pMethod: values.pMethod,
                     total:  values.gTotal,
-                    date: values.Date,
-                    status: "normal"
+                    date: date,
+                    status: "normal",
+                    products: JSON.stringify(values.orderDetails)
                 }).then(res => {
+                    console.log(res)
                         resetFormControls();
                         setNotify({isOpen:true, message:'Se ha creado la nueva orden'});
                     })
                     .catch(err => toast.error("Error al Crear orden"));
-            }
-            else {
-                Axios.put("https://caribeazul-backend-muvy3.ondigitalocean.app/updateorder",{
-                    id: values.id,
-                    customer: values.customer,
-                    pMethod: values.pMethod,
-                    total:  values.gTotal,
-                    modified: "Actualizada"
-                }).then(res => {
-                        setOrderId(0);
-                        setNotify({isOpen:true, message:'La orden ha sido actualizada'});
-                    })
-                    .catch(err => toast.error("Error al actualizar orden"));
-            }
+
+                // Axios.put("https://caribeazul-backend-muvy3.ondigitalocean.app/updateorder",{
+                //     id: values.id,
+                //     customer: values.customer,
+                //     pMethod: values.pMethod,
+                //     total:  values.gTotal,
+                //     status: "Actualizada",
+                //     products: values.orderDetails
+                // }).then(res => {
+                //         setOrderId(0);
+                //         setNotify({isOpen:true, message:'La orden ha sido actualizada'});
+                //     })
+                //     .catch(err => toast.error("Error al actualizar orden"));
+            
         }
 
     }
@@ -145,7 +144,7 @@ export default function OrderForm(props) {
                         <Input
                             label="Cliente"
                             placeholder="Cliente"
-                            name="Costumer"
+                            name="customer"
                             onChange={handleInputChange}
                             style={{width: "500px"}}
                             iLProps= {{style: {marginTop:"5px"}}}
