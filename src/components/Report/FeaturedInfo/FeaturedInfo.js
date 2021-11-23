@@ -103,7 +103,7 @@ export default function FeaturedInfo() {
         <span className="featuredSub">Comparado con el inventario.</span>
       </div>
       <div className="featuredItem">
-        <span className="featuredTitle">Venta actual</span>
+        <span className="featuredTitle">Venta actual(30dias)</span>
         <div className="featuredMoneyContainer">
           <span className="featuredMoney">${sumarizeMonth().toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</span>
           <span className="featuredMoneyRate">

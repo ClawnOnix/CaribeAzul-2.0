@@ -6,7 +6,7 @@ import { timeShow } from "../../../Utils/Utils";
 import "../Details/detail.scss"
 export default function WidgetLg() {
   const [values, setValues] = useState([]);
-  let product = [];
+  let products = [];
   let productafter = [];
   const [orderList, setOrderList] = useState([{
     id: 0,
@@ -14,24 +14,26 @@ export default function WidgetLg() {
     date: "",
     status: "",
     total: 0,
-    products: JSON.stringify(`[{hola: "0", holita: "1"}]`)
+    products: JSON.stringify([{}])
   }]);
 
   useEffect(() => {
     Axios.get("https://caribeazul-backend-muvy3.ondigitalocean.app/orderlist").then(res => {
       setValues(res.data);
+      setOrderList(res.data[0]);
     }).catch(err => toast.error("Error al obtener Ordenes!"))
   }, []);
 
-  function details(order) {
-      setOrderList(order);
-      let json = orderList.products
-      product = JSON.parse(json)
-      console.log(product)
-      for (let index = 0; index < product.length; index++) {
-           productafter.push(product[index]);
-      }
-  };
+  function detail(order){
+    const json = JSON.stringify([{name:"hola", price: 500, quantity: 1}, {name:"holas", price: 40, quantity: 1}])
+
+    products = JSON.parse(json);
+  
+    for (let index = 0; index < products.length; index++) {
+    productafter.push(products[index]);
+    }
+  }
+  
   return (
     <>
     <>
@@ -48,7 +50,7 @@ export default function WidgetLg() {
       </div>
     </div>
 
-      <table className="table" style={{marginBottom: "0px"}}>
+      <table className="widgetLgTable" style={{marginBottom: "0px"}}>
 
         <tbody>
 
@@ -58,9 +60,8 @@ export default function WidgetLg() {
             <th >Cantidad</th>
             <th >Precio</th>
           </tr>
-          {
-            
-            productafter.map((item, index) => {
+          {     
+            [productafter].map((item, index) => {
               console.log(item)
               let total = item.price * item.quantity;
               return (
@@ -107,13 +108,13 @@ export default function WidgetLg() {
               <td className="widgetLgDate">{timeShow(item.date)}</td>
               <td className="widgetLgAmount">{item.total}</td>
               <td className="widgetLgStatus">{item.status}</td>
-              <td title="info" data-toggle="tooltip" type="button" onClick={() => {details(item)}}><i className="material-icons">info</i></td>
+              <td title="info" data-toggle="tooltip" type="button" onClick={() => {detail(item)}}><i className="material-icons">info</i></td>
             </tr>);
           })
         }
         </tbody>
       </table>
     </div>
-    </>
+</>
   );
 }

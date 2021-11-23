@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react';
 import Navbar from '../components/SideBar/Navbar';
-
 import FeaturedInfo from "../components/Report/FeaturedInfo/FeaturedInfo";
 import "./reports.css";
 import WidgetLg from "../components/Report/WidgetLg/WidgetLg";

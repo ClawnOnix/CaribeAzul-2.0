@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import { Link } from 'react-router-dom';
@@ -10,14 +10,25 @@ function Navbar() {
   const [sidebar, setSidebar] = useState(false);
   const [loading, setLoading] = useState(false)
   const showSidebar = () => setSidebar(!sidebar);
+  const [loged, setLoged] = useState(false)
 
   function logOff() {
     sessionStorage.removeItem("user");
   }
-  let data = JSON.parse(sessionStorage.getItem('user'));
-  if (data.rol !== "admin") {
-    setLoading(true);
-  }
+  useEffect(() => {
+    let data = JSON.parse(sessionStorage.getItem('user'));
+    if(!data){
+      setLoged(false)
+      console.log(data)
+    }
+    else{
+      if (data.rol !== "admin") {
+       setLoading(true);
+      }
+    }
+  }, [])
+
+
 
   return (
     <>
