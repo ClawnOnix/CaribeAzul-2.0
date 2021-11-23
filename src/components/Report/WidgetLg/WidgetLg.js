@@ -21,10 +21,12 @@ export default function WidgetLg() {
     Axios.get("https://caribeazul-backend-muvy3.ondigitalocean.app/orderlist").then(res => {
       setValues(res.data);
       setOrderList(res.data[0]);
+      console.log(values)
     }).catch(err => toast.error("Error al obtener Ordenes!"))
   }, []);
 
   function detail(order){
+    setOrderList(order)
     const json = JSON.stringify([{name:"hola", price: 500, quantity: 1}, {name:"holas", price: 40, quantity: 1}])
 
     products = JSON.parse(json);
@@ -32,6 +34,19 @@ export default function WidgetLg() {
     for (let index = 0; index < products.length; index++) {
     productafter.push(products[index]);
     }
+  }
+
+  function deleteOrder(order){
+    Axios.put(`https://caribeazul-backend-muvy3.ondigitalocean.app/deleteorder`, {
+      id: order.id,
+      status: "Eliminada"
+    }).then((res) => {
+      setValues(
+        values.filter((val) => {
+          return val.id !== order.id;
+        }));
+        toast.error({isOpen:true, message:'La orden ha sido Eliminada'})
+    }).catch(err => toast.error("Error al eliminar orden"));
   }
   
   return (
@@ -50,7 +65,7 @@ export default function WidgetLg() {
       </div>
     </div>
 
-      <table className="widgetLgTable" style={{marginBottom: "0px"}}>
+      <table className="table" style={{marginBottom: "0px"}}>
 
         <tbody>
 
@@ -69,7 +84,7 @@ export default function WidgetLg() {
                   <td>{item.name}</td>
                   <td> {item.price} </td>
                   <td>{item.quantity}</td>
-                  <td>{total}</td>
+                  <td>{total.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</td>
                 </tr>);
             })
           }
@@ -78,9 +93,9 @@ export default function WidgetLg() {
       <table className="table" style={{marginTop: "0px"}}>
         <tbody>
           <tr>
-            <td style={{width:"226.86px"}}><b>Total:</b></td>
-            <td></td>
-            <td style= {{width:"167.73px"}}><b>{orderList.total}</b></td>
+            <td style={{width:"226.86px", textAlign:"left"}}><b>Total:</b></td>
+            <td>&nbsp;</td>
+            <td style= {{width:"120.73px"}}><b>{orderList.total ? orderList.total.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') : 0}</b></td>
           </tr>
         </tbody>
       </table>
@@ -106,9 +121,10 @@ export default function WidgetLg() {
                 <span className="widgetLgName">{item.customer} </span>
               </td>
               <td className="widgetLgDate">{timeShow(item.date)}</td>
-              <td className="widgetLgAmount">{item.total}</td>
+              <td className="widgetLgAmount">{item.total.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</td>
               <td className="widgetLgStatus">{item.status}</td>
               <td title="info" data-toggle="tooltip" type="button" onClick={() => {detail(item)}}><i className="material-icons">info</i></td>
+              { item.status !== "Eliminada" ? <td title="delete" data-toggle="tooltip" type="button" onClick={() => {deleteOrder(item)}}><i className="material-icons">delete</i></td> : null}
             </tr>);
           })
         }

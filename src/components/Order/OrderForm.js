@@ -93,30 +93,21 @@ export default function OrderForm(props) {
                     pMethod: values.pMethod,
                     total:  values.gTotal,
                     date: date,
-                    status: "normal",
+                    status: "Normal",
                     products: JSON.stringify(values.orderDetails)
                 }).then(res => {
-                    console.log(res)
+                    updateProductQuantity(values.orderDetails)
                         resetFormControls();
                         setNotify({isOpen:true, message:'Se ha creado la nueva orden'});
                     })
-                    .catch(err => toast.error("Error al Crear orden"));
-
-                // Axios.put("https://caribeazul-backend-muvy3.ondigitalocean.app/updateorder",{
-                //     id: values.id,
-                //     customer: values.customer,
-                //     pMethod: values.pMethod,
-                //     total:  values.gTotal,
-                //     status: "Actualizada",
-                //     products: values.orderDetails
-                // }).then(res => {
-                //         setOrderId(0);
-                //         setNotify({isOpen:true, message:'La orden ha sido actualizada'});
-                //     })
-                //     .catch(err => toast.error("Error al actualizar orden"));
+                    .catch(err => toast.error("Error al Crear orden"));     
             
         }
 
+    }
+
+    function updateProductQuantity(){
+// update :(
     }
 
     const openListOfOrders = () => {
@@ -151,7 +142,7 @@ export default function OrderForm(props) {
                         />
                     </Grid>
                     <Grid item xs={6}>
-                        <Select
+                        <Select 
                             label="Metodo de Pago"
                             name="pMethod"
                             value={values.pMethod}

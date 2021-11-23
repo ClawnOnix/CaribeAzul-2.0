@@ -12,7 +12,10 @@ export default function FeaturedInfo() {
 
   useEffect(() => {
     Axios.get("https://caribeazul-backend-muvy3.ondigitalocean.app/orderlist").then(res => {
-      setValues(res.data);
+      const data = res.data.filter((val) => {
+        return val.status !== "eliminada";
+      })
+      setValues(data);
     }).catch(err => toast.error("Error al obtener Ordenes"))
 
     Axios.get("https://caribeazul-backend-muvy3.ondigitalocean.app/productlist").then((response) => {

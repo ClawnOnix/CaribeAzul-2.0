@@ -40,23 +40,23 @@ export default function OrderList(props) {
                         orderList.map(item => (
                             <TableRow key={item.id}>
                                 <TableCell
-                                    onClick={e => showForUpdate(item.id)}>
+                                    >
                                     {item.id}
                                 </TableCell>
                                 <TableCell
-                                    onClick={e => showForUpdate(item.id)}>
+                                   >
                                     {item.customer}
                                 </TableCell>
                                 <TableCell
-                                    onClick={e => showForUpdate(item.id)}>
+                                  >
                                     {item.pMethod}
                                 </TableCell>
                                 <TableCell
-                                    onClick={e => showForUpdate(item.id)}>
+                                    >
                                     {item.total}
                                 </TableCell>
                                 <TableCell
-                                onClick={e => showForUpdate(item.id)}>
+                                >
                                     {item.status}
                                 </TableCell>
 

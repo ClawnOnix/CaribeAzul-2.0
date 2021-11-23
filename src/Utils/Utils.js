@@ -13,7 +13,7 @@ export function timeNow() {
     let today = new Date(prop);
   
     let date = today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
-    let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    let time = (today.getHours()+4) + ":" + today.getMinutes() + ":" + today.getSeconds();
     const dateTime = date+' '+time;
       return dateTime;
     }

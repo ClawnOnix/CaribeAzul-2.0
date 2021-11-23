@@ -92,7 +92,7 @@ export default function SearchItems(props) {
                     <SearchTwoToneIcon />
                 </IconButton>
             </Paper>
-            <List className={classes.listRoot} style={{width: "500px", marginLeft:"10px"}}>
+            <List className={classes.listRoot} style={{width: "500px", marginLeft:"10px", height:"190px"}}>
                 {
                     searchList.map((item, idx) => (
                         <ListItem

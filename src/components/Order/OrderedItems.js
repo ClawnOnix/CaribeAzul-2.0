@@ -45,7 +45,8 @@ export default function OrderedItems(props) {
     const { values, setValues } = props;
     const classes = useStyles();
 
-    let orderedItems = values.orderDetails;
+    let orderedItems = [];
+    orderedItems = values.orderDetails
 
     const removeItem = (index, id) => {
         debugger;
