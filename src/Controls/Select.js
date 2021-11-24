@@ -9,7 +9,7 @@ export default function Select(props) {
         <FormControl style={{width:"500px"}}
             variant={varient || "outlined"}
             {...(error && { error: true })}>
-            <InputLabel style={{marginTop:"5px"}}>{label}</InputLabel>
+            <InputLabel style={{marginTop:"5px", width:"70%"}}>{label}</InputLabel>
             <MuiSelect
                 label={label}
                 zize={zize}

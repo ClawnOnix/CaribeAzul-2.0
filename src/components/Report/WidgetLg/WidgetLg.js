@@ -20,20 +20,21 @@ export default function WidgetLg() {
   useEffect(() => {
     Axios.get("https://caribeazul-backend-muvy3.ondigitalocean.app/orderlist").then(res => {
       setValues(res.data);
-      setOrderList(res.data[0]);
-      console.log(values)
+      detail(res.data[0]);
     }).catch(err => toast.error("Error al obtener Ordenes!"))
   }, []);
 
   function detail(order){
     setOrderList(order)
-    const json = JSON.stringify([{name:"hola", price: 500, quantity: 1}, {name:"holas", price: 40, quantity: 1}])
+    const json = JSON.stringify(orderList.products)
 
     products = JSON.parse(json);
   
     for (let index = 0; index < products.length; index++) {
-    productafter.push(products[index]);
-    }
+    productafter.push(JSON.stringify(products[index]));
+    } 
+
+    console.log(products)
   }
 
   function deleteOrder(order){
@@ -48,6 +49,10 @@ export default function WidgetLg() {
         toast.error({isOpen:true, message:'La orden ha sido Eliminada'})
     }).catch(err => toast.error("Error al eliminar orden"));
   }
+
+
+
+  
   
   return (
     <>
