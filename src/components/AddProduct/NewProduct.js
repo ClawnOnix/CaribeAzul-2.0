@@ -33,7 +33,7 @@ export default function Products(props) {
         name: name,
         url: await fileRef.getDownloadURL()
       })
-    })
+    }).then(window.location.reload())
   }
 
   function addProducts(name, description, price, quantity){
