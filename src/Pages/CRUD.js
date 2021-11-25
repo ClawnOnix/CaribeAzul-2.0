@@ -13,7 +13,7 @@ function CRUD() {
     if(!data) {
       history.push("/sign-in");
     }
-    else if( data.rol !== "admin"){
+    else if( data.rol !== "Admin"){
       setLoading(true);
       toast.error("!SOLO! el Admin puede acceder a esta pagina!")
     }

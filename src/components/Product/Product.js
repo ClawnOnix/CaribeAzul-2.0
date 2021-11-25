@@ -33,7 +33,7 @@ export default function Product(props) {
       <Card>
         <Card.Body>
           <Card.Title>{product.name}</Card.Title>
-          <Card.Img style={{width: "150px", height: "100px"}} src={image}  />
+          <Card.Img style={{width: "150px", height: "100px"}} src={image !== "undefined" && image !== "null" ? image : "https://cdn.pixabay.com/photo/2015/05/31/15/07/coffee-792113_960_720.jpg"}  />
           <Card.Text>{product.description}</Card.Text>
           <Card.Text>{product.quantity} Disp.</Card.Text>
           <Card.Text>{product.price.toFixed(2)} DOP / Unidad</Card.Text>

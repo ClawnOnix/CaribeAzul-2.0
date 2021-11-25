@@ -32,12 +32,12 @@ export default function Login() {
 
                     <div className="form-group">
                         <label className="font">User</label>
-                        <input type="text" className="form-control" placeholder="Enter email" onChange={(e) => { setUsername(e.target.value) }} />
+                        <input type="text" className="form-control" placeholder="Usuario" onChange={(e) => { setUsername(e.target.value) }} />
                     </div>
 
                     <div className="form-group">
                         <label className="font">Password</label>
-                        <input type="password" className="form-control" placeholder="Enter password" onChange={(e) => { setPassword(e.target.value) }} />
+                        <input type="password" className="form-control" placeholder="Contraseña" onChange={(e) => { setPassword(e.target.value) }} />
                     </div>
 
                     <button type="button" className="btn btn-primary btn-block"  style={{marginTop:"5px", width:"100%"}} onClick={() => { logUser() }}>Acceder</button>

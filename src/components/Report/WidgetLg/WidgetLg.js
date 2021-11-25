@@ -24,13 +24,16 @@ export default function WidgetLg() {
     }).catch(err => toast.error("Error al obtener Ordenes!"))
   }, []);
 
-  function detail(order){
-    setOrderList(order)
-    setProduct(order.products);
+  function detail(order) {
+    if (order) {
+      setOrderList(order)
+      setProduct(order.products);
+
+    }
 
   }
 
-  function deleteOrder(order){
+  function deleteOrder(order) {
     Axios.put(`https://caribeazul-backend-muvy3.ondigitalocean.app/deleteorder`, {
       id: order.id,
       status: "Eliminada"
@@ -39,95 +42,95 @@ export default function WidgetLg() {
         values.filter((val) => {
           return val.id !== order.id;
         }));
-        toast.error({isOpen:true, message:'La orden ha sido Eliminada'})
+      toast.error({ isOpen: true, message: 'La orden ha sido Eliminada' })
     }).catch(err => toast.error("Error al eliminar orden"));
   }
 
 
 
-  
-  
+
+
   return (
     <>
-    <>
-      <div className="chart">
-      <h3 className="chartTitle">Detalle</h3>
-      <div style={{display: "flex"}}>
-      <div style={{width: "fit-content"}}>
-      <p >Orden #{orderList.id !== 0 ? orderList.id : ""}</p>
-      <p >Cliente: {orderList.customer}</p>
+      <>
+        <div className="chart">
+          <h3 className="chartTitle">Detalle</h3>
+          <div style={{ display: "flex" }}>
+            <div style={{ width: "fit-content" }}>
+              <p >Orden #{orderList.id !== 0 ? orderList.id : ""}</p>
+              <p >Cliente: {orderList.customer}</p>
+            </div>
+            <div style={{ width: "fit-content", marginLeft: "20px" }}>
+              <p >Fecha: {orderList.date !== "" ? timeShow(orderList.date) : orderList.date}</p>
+              <p >Status: {orderList.status}</p>
+            </div>
+          </div>
+
+          <table className="table" style={{ marginBottom: "0px" }}>
+
+            <tbody>
+
+              <tr >
+                <th >Producto</th>
+                <th >Precio U.</th>
+                <th >Cantidad</th>
+                <th >Precio</th>
+              </tr>
+              {
+                product.map((item, index) => {
+                  let total = item.price * item.quantity;
+                  return (
+                    <tr key={index}>
+                      <td>{item.name}</td>
+                      <td> {item.price} </td>
+                      <td>{item.quantity}</td>
+                      <td>{total.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</td>
+                    </tr>);
+                })
+              }
+            </tbody>
+          </table>
+          <table className="table" style={{ marginTop: "0px" }}>
+            <tbody>
+              <tr>
+                <td style={{ width: "226.86px", textAlign: "left" }}><b>Total:</b></td>
+                <td>&nbsp;</td>
+                <td style={{ width: "120.73px" }}><b>{orderList.total ? orderList.total.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') : 0}</b></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </>
+      <div className="widgetLg">
+        <h3 className="widgetLgTitle">Ordenes</h3>
+        <table className="widgetLgTable">
+          <tbody>
+            <tr className="widgetLgTr">
+              <th className="widgetLgTh">no. Orden</th>
+              <th className="widgetLgTh">Cliente</th>
+              <th className="widgetLgTh">Fecha</th>
+              <th className="widgetLgTh">Total</th>
+              <th className="widgetLgTh">Status</th>
+            </tr>
+            {
+              values.map((item, index) => {
+                return (
+                  <tr className="widgetLgTr" key={index}>
+                    <td className="widgetLgDate">{item.id}</td>
+                    <td className="widgetLgUser">
+                      <span className="widgetLgName">{item.customer} </span>
+                    </td>
+                    <td className="widgetLgDate">{timeShow(item.date)}</td>
+                    <td className="widgetLgAmount">{item.total.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</td>
+                    <td className="widgetLgStatus">{item.status}</td>
+                    <td title="info" data-toggle="tooltip" type="button" onClick={() => { detail(item) }}><i className="material-icons">info</i></td>
+                    {item.status !== "Eliminada" ? <td title="delete" data-toggle="tooltip" type="button" onClick={() => { deleteOrder(item) }}><i className="material-icons">delete</i></td> : null}
+                  </tr>);
+              })
+            }
+          </tbody>
+        </table>
       </div>
-      <div style={{width: "fit-content", marginLeft: "20px"}}>
-      <p >Fecha: {orderList.date !== "" ? timeShow(orderList.date) : ""}</p>
-       <p >Status: {orderList.status}</p>
-      </div>
-    </div>
-
-      <table className="table" style={{marginBottom: "0px"}}>
-
-        <tbody>
-
-          <tr >
-            <th >Producto</th>
-            <th >Precio U.</th>
-            <th >Cantidad</th>
-            <th >Precio</th>
-          </tr>
-          {     
-            product.map((item, index) => {
-              let total = item.price * item.quantity;
-              return (
-                <tr key={index}>
-                  <td>{item.name}</td>
-                  <td> {item.price} </td>
-                  <td>{item.quantity}</td>
-                  <td>{total.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</td>
-                </tr>);
-            })
-          }
-        </tbody>
-      </table>
-      <table className="table" style={{marginTop: "0px"}}>
-        <tbody>
-          <tr>
-            <td style={{width:"226.86px", textAlign:"left"}}><b>Total:</b></td>
-            <td>&nbsp;</td>
-            <td style= {{width:"120.73px"}}><b>{orderList.total ? orderList.total.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') : 0}</b></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
     </>
-        <div className="widgetLg">
-      <h3 className="widgetLgTitle">Ordenes</h3>
-      <table className="widgetLgTable">
-        <tbody>
-        <tr className="widgetLgTr">
-          <th className="widgetLgTh">no. Orden</th>
-          <th className="widgetLgTh">Cliente</th>
-          <th className="widgetLgTh">Fecha</th>
-          <th className="widgetLgTh">Total</th>
-          <th className="widgetLgTh">Status</th>
-        </tr>
-        {
-          values.map((item, index) => {
-            return (
-              <tr className="widgetLgTr" key={index}>
-              <td className="widgetLgDate">{item.id}</td>
-              <td className="widgetLgUser">
-                <span className="widgetLgName">{item.customer} </span>
-              </td>
-              <td className="widgetLgDate">{timeShow(item.date)}</td>
-              <td className="widgetLgAmount">{item.total.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</td>
-              <td className="widgetLgStatus">{item.status}</td>
-              <td title="info" data-toggle="tooltip" type="button" onClick={() => {detail(item)}}><i className="material-icons">info</i></td>
-              { item.status !== "Eliminada" ? <td title="delete" data-toggle="tooltip" type="button" onClick={() => {deleteOrder(item)}}><i className="material-icons">delete</i></td> : null}
-            </tr>);
-          })
-        }
-        </tbody>
-      </table>
-    </div>
-</>
   );
 }

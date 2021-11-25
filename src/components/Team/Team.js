@@ -2,7 +2,7 @@ import "./Team.scss";
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Modal } from 'react-bootstrap';
-import { Input, Select,Button } from "../../Controls";
+import { Input, Button } from "../../Controls";
 import AddIcon from '@material-ui/icons/Add';
 import Axios from "axios";
 import { roles } from "../../Utils/constants";
@@ -22,20 +22,26 @@ function Team() {
 
   
   function addUser() {
-    Axios.post("https://caribeazul-backend-muvy3.ondigitalocean.app/register", {
-      username: username,
-      password: password,
-      role: role 
-    }).then(() => {
-      setUserList([
-        ...userList,
-        {
-          username: username,
-          password: password,
-          role: role
-        },
-      ]);
-    });
+
+    if(username !== "" || password !=="")
+    {
+      Axios.post("https://caribeazul-backend-muvy3.ondigitalocean.app/register", {
+        username: username,
+        password: password,
+        role: role 
+      }).then(() => {
+        handleClose()
+        setUserList([
+          ...userList,
+          {
+            username: username,
+            password: password,
+            role: role
+          },
+        ]);
+      });
+    }
+    
   };
 
   function getUser() {
@@ -148,7 +154,13 @@ function Team() {
                   <Input type="password" className="form-control" id="passwordInput" placeholder="Contraseña" onChange={(e) => {setPassword(e.target.value)}}/>
                 </div>
                 <div className="form-group mt-3">
-                  <Select  className="form-control" id="roleInput" options={roles} placeholder="Rol" onChange={(e) => {setRole(e.target.value)}}/>
+                <select id="selectRole" style={{ width: "33%" }} className="form-select" aria-label="Default select example" onChange={(e) => { setRole(e.target.value) }}>
+                    {roles.map(options => (
+                      <option key={options.id} value={options.title}>
+                        {options.title}
+                      </option>
+                    ))}
+                  </select>
                 </div>
 
                 <Button type="button"  className="button" onClick={() => {addUser()}}>Añadir</Button>
@@ -178,13 +190,19 @@ function Team() {
             <Modal.Body>
               <form>
                 <div className="form-group">
-                  <Input  className="form-control" id="nameInput" placeholder={userUpdate.username} onChange={(e) => {setUsername(e.target.value)}}/>
+                  <Input  className="form-control" id="nameInput2" placeholder={userUpdate.username} onChange={(e) => {setUsername(e.target.value)}}/>
                 </div>
                 <div className="form-group mt-3">
-                  <Input type="password" className="form-control" id="passwordInput" placeholder={userUpdate.password} onChange={(e) => {setPassword(e.target.value)}}/>
+                  <Input type="password" className="form-control" id="passwordInput2" placeholder={userUpdate.password} onChange={(e) => {setPassword(e.target.value)}}/>
                 </div>
                 <div className="form-group mt-3">
-                  <Select  className="form-control" id="roleInput" options={roles} placeholder={userUpdate.role} onChange={(e) => {setRole(e.target.value)}}/>
+                <select id="selectRole2" style={{ width: "33%" }} className="form-select" aria-label="Default select example" onChange={(e) => { setRole(e.target.value) }}>
+                    {roles.map(options => (
+                      <option key={options.id} value={options.title}>
+                        {options.title}
+                      </option>
+                    ))}
+                  </select>
                 </div>
                 <Button type="button" className="button" onClick={() => {updateUser()}}>Actualizar</Button>
               </form>

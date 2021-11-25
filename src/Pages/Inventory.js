@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import Products from "../components/Products";
-import { STORAGE_PRODUCTS_CART } from "../Utils/constants";
-import NewProduct from "../components/AddProduct";
 import Navbar from '../components/SideBar/Navbar';
 import { useHistory } from "react-router-dom";
 
 function Inventory() {
   const products = null;
-  const [productsCart, setProductsCart] = useState([]);
 
   const history = useHistory();
   useEffect(() => {
@@ -19,35 +16,12 @@ function Inventory() {
 
   }, []);
 
-  useEffect(() => {
-    getProductsCart();
-  }, []);
 
-  const getProductsCart = () => {
-    const idsProducts = localStorage.getItem(STORAGE_PRODUCTS_CART);
-
-    if (idsProducts) {
-      const idsProductsSplit = idsProducts.split(",");
-      setProductsCart(idsProductsSplit);
-    } else {
-      setProductsCart([]);
-    }
-  };
-
-  const addProductCart = (id, name) => {
-    const idsProducts = productsCart;
-    idsProducts.push(id);
-    setProductsCart(idsProducts);
-    localStorage.setItem(STORAGE_PRODUCTS_CART, productsCart);
-    getProductsCart();
-    toast.success(`${name} añadido al carrito correctamente.`);
-  };
 
   return (
     <div>
     <Navbar />
-    <NewProduct/>
-    <Products products={products} addProductCart={addProductCart} />
+    <Products products={products} />
     <ToastContainer
     position="bottom-left"
     autoClose={5000}

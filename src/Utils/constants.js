@@ -4,12 +4,12 @@ export const STORAGE_PRODUCTS_CART = "productsCart";
 
 export const pMethods = [
     { id: 'none', title: 'Selecciona' },
-    { id: 'Cash', title: 'Efectivo' },
-    { id: 'Card', title: 'Tarjeta' },
+    { id: 'Efectivo', title: 'Efectivo' },
+    { id: 'Tarjeta', title: 'Tarjeta' },
 ]
 
 export const roles = [
-    { id: 'admin', title: 'Admin' },
-    { id: 'factoring', title: 'Cajero' },
-    { id: 'accountant', title: 'Contable' },
+    { id: 'Admin', title: 'Admin' },
+    { id: 'Cajero', title: 'Cajero' },
+    { id: 'Contable', title: 'Contable' },
 ]
