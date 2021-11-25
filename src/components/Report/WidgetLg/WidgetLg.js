@@ -7,14 +7,14 @@ import "../Details/detail.scss"
 export default function WidgetLg() {
   const [values, setValues] = useState([]);
   let products = [];
-  let productafter = [];
+  const [product, setProduct] = useState([]);
   const [orderList, setOrderList] = useState([{
     id: 0,
     customer: "",
     date: "",
     status: "",
     total: 0,
-    products: JSON.stringify([{}])
+    products: []
   }]);
 
   useEffect(() => {
@@ -26,15 +26,8 @@ export default function WidgetLg() {
 
   function detail(order){
     setOrderList(order)
-    const json = JSON.stringify(orderList.products)
+    setProduct(order.products);
 
-    products = JSON.parse(json);
-  
-    for (let index = 0; index < products.length; index++) {
-    productafter.push(JSON.stringify(products[index]));
-    } 
-
-    console.log(products)
   }
 
   function deleteOrder(order){
@@ -81,8 +74,7 @@ export default function WidgetLg() {
             <th >Precio</th>
           </tr>
           {     
-            [productafter].map((item, index) => {
-              console.log(item)
+            product.map((item, index) => {
               let total = item.price * item.quantity;
               return (
                 <tr key={index}>
