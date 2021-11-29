@@ -135,6 +135,7 @@ export default function OrderForm(props) {
                         <Input
                             label="Cliente"
                             placeholder="Cliente"
+                            value={values.customer}
                             name="customer"
                             onChange={handleInputChange}
                             style={{width: "500px"}}

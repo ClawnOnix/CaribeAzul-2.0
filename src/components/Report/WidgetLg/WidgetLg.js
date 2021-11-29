@@ -38,11 +38,13 @@ export default function WidgetLg() {
       id: order.id,
       status: "Eliminada"
     }).then((res) => {
-      setValues(
-        values.filter((val) => {
-          return val.id !== order.id;
-        }));
-      toast.error({ isOpen: true, message: 'La orden ha sido Eliminada' })
+      if (res.status === 200){
+        setValues(
+          values.filter((val) => {
+            return val.id !== order.id;
+          }));
+        toast.error({ isOpen: true, message: 'La orden ha sido Eliminada' })
+      }   
     }).catch(err => toast.error("Error al eliminar orden"));
   }
 
