@@ -61,9 +61,9 @@ export default function OrderForm(props) {
         if (orderId === 0) resetFormControls()
         else {
             Axios.get("https://caribeazul-backend-muvy3.ondigitalocean.app/orderlist").then(res => {
-                    setValues(res.data);
-                    setErrors({});
-                })
+                setValues(res.data);
+                setErrors({});
+            })
                 .catch(err => toast.error("Error al obtener Ordenes!"))
         }
 
@@ -86,28 +86,44 @@ export default function OrderForm(props) {
 
     const submitOrder = e => {
         e.preventDefault();
-          let date = timeNow()
+        let date = timeNow()
         if (validateForm()) {
-                Axios.post("https://caribeazul-backend-muvy3.ondigitalocean.app/neworder", {
-                    customer: values.customer,
-                    pMethod: values.pMethod,
-                    total:  values.gTotal,
-                    date: date,
-                    status: "Normal",
-                    products: JSON.stringify(values.orderDetails)
-                }).then(res => {
-                    updateProductQuantity(values.orderDetails)
-                        resetFormControls();
-                        setNotify({isOpen:true, message:'Se ha creado la nueva orden'});
-                    })
-                    .catch(err => toast.error("Error al Crear orden"));     
-            
+            let ITBIS = null;
+            let gtotal = null;
+            if (values.pMethod === "Tarjeta") {
+                ITBIS = Math.floor(values.gTotal * 18) / 100;
+                gtotal = values.gTotal + ITBIS;
+            }
+            if( values.descuento !== null && values.descuento > 0 ) {
+                gtotal = gtotal - values.descuento;
+            }
+            Axios.post("https://caribeazul-backend-muvy3.ondigitalocean.app/neworder", {
+                customer: values.customer,
+                pMethod: values.pMethod,
+                total: gtotal,
+                date: date,
+                status: "Normal",
+                products: JSON.stringify(values.orderDetails),
+                ITBIS: ITBIS,
+                descuento: values.descuento
+            }).then(res => {
+                updateProductQuantity(values.orderDetails)
+                resetFormControls();
+                setNotify({ isOpen: true, message: 'Se ha creado la nueva orden' });
+            }).catch(err => toast.error("Error al Crear orden"));
+
         }
 
     }
 
-    function updateProductQuantity(){
-// update :(
+    function updateProductQuantity(details) {
+        details.map((item) => (
+            Axios.put(`https://caribeazul-backend-muvy3.ondigitalocean.app/updateproductquantity`, {
+                id: item.id,
+                quantity: item.quantity,
+            }).then((res) => {
+            })//.catch(err => toast.error("Orden Creada! porfavor conctactar al administrador!"))
+        ))     
     }
 
     const openListOfOrders = () => {
@@ -118,9 +134,9 @@ export default function OrderForm(props) {
         <>
             <Form onSubmit={submitOrder}>
                 <Grid container>
-                    <Grid item xs={6} style={{heigth:"150px"}}>
+                    <Grid item xs={6} style={{ heigth: "150px" }}>
                         <Input
-                            style={{width: "500px"}}
+                            style={{ width: "500px" }}
                             disabled
                             label="Numero de Orden"
                             name="orderNumber"
@@ -130,7 +146,7 @@ export default function OrderForm(props) {
                                     className={classes.adornmentText}
                                     position="start">#</InputAdornment>
                             }}
-                            iLProps= {{style: {marginTop:"5px"}}}
+                            iLProps={{ style: { marginTop: "5px" } }}
                         />
                         <Input
                             label="Cliente"
@@ -138,12 +154,12 @@ export default function OrderForm(props) {
                             value={values.customer}
                             name="customer"
                             onChange={handleInputChange}
-                            style={{width: "500px"}}
-                            iLProps= {{style: {marginTop:"5px"}}}
+                            style={{ width: "500px" }}
+                            iLProps={{ style: { marginTop: "5px" } }}
                         />
                     </Grid>
                     <Grid item xs={6}>
-                        <Select 
+                        <Select
                             label="Metodo de Pago"
                             name="pMethod"
                             value={values.pMethod}
@@ -152,12 +168,25 @@ export default function OrderForm(props) {
                             error={errors.pMethod}
                         />
                         <Input
+                            label="Descuento"
+                            name="descuento"
+                            value={values.descuento}
+                            onChange={handleInputChange}
+                            style={{ width: "500px" }}
+                            iLProps={{ style: { marginTop: "5px" } }}
+                            InputProps={{
+                                startAdornment: <InputAdornment
+                                    className={classes.adornmentText}
+                                    position="start">$</InputAdornment>
+                            }}
+                        />
+                        <Input
                             disabled
                             label="Total"
                             name="gTotal"
                             value={values.gTotal}
-                            style={{width: "500px"}}
-                            iLProps= {{style: {marginTop:"5px"}}}
+                            style={{ width: "500px" }}
+                            iLProps={{ style: { marginTop: "5px" } }}
                             InputProps={{
                                 startAdornment: <InputAdornment
                                     className={classes.adornmentText}
@@ -166,18 +195,18 @@ export default function OrderForm(props) {
                         />
                         <ButtonGroup className={classes.submitButtonGroup}>
                             <MuiButton
-                                style={{width: "250px"}}
+                                style={{ width: "250px" }}
                                 size="large"
                                 type="submit">Procesar</MuiButton>
                             <MuiButton
-                                style={{width: "250px"}}
+                                style={{ width: "250px" }}
                                 size="small"
                                 onClick={resetForm}
                                 startIcon={<ReplayIcon />}
                             />
                         </ButtonGroup>
                         <Button
-                            style={{width: "250px", marginLeft: "140px"}}
+                            style={{ width: "250px", marginLeft: "140px" }}
                             size="medium"
                             onClick={openListOfOrders}
                             startIcon={<ReorderIcon />}
@@ -190,7 +219,7 @@ export default function OrderForm(props) {
                 openPopup={orderListVisibility}
                 setOpenPopup={setOrderListVisibility}>
                 <OrderList
-                    {...{ setOrderId, setOrderListVisibility}} />
+                    {...{ setOrderId, setOrderListVisibility }} />
             </Popup>
             <Notification
                 {...{ notify, setNotify }} />

@@ -6,11 +6,12 @@ import { Input, Button } from "../../Controls";
 import AddIcon from '@material-ui/icons/Add';
 import Axios from "axios";
 import { roles } from "../../Utils/constants";
+import { toast } from "react-toastify";
 
 function Team() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("");
+  const [role, setRole] = useState("Admin");
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -51,18 +52,22 @@ function Team() {
   };
 
   function updateUser(id){
-  Axios.put(`https://caribeazul-backend-muvy3.ondigitalocean.app/update`, {
-    id: id,
-    username: username,
-    password: password,
-    role: role 
-  }).then((res) => {
-    console.log(res)
-    if (res === 200){
-      getUser()
-      handleClose2()
+    if( username !== "" && password !== ""){
+      Axios.put(`https://caribeazul-backend-muvy3.ondigitalocean.app/update`, {
+        id: id,
+        username: username,
+        password: password,
+        role: role 
+      }).then((res) => {
+        console.log(res)
+        if (res === 200){
+          getUser()
+          handleClose2()
+        }
+        });
     }
-    });
+    else{toast.error("Llena todos los campos!")}
+  
   }
 
   function deleteUser(id) {
@@ -194,10 +199,10 @@ function Team() {
             <Modal.Body>
               <form>
                 <div className="form-group">
-                  <Input  className="form-control" id="nameInput2" placeholder={userUpdate.username} onChange={(e) => {setUsername(e.target.value)}}/>
+                  <Input  className="form-control" id="nameInput2" required placeholder={userUpdate.username} onChange={(e) => {setUsername(e.target.value)}}/>
                 </div>
                 <div className="form-group mt-3">
-                  <Input type="password" className="form-control" id="passwordInput2" placeholder={userUpdate.password} onChange={(e) => {setPassword(e.target.value)}}/>
+                  <Input type="password" className="form-control" id="passwordInput2" required placeholder={userUpdate.password} onChange={(e) => {setPassword(e.target.value)}}/>
                 </div>
                 <div className="form-group mt-3">
                 <select id="selectRole2" style={{ width: "33%" }} className="form-select" aria-label="Default select example" onChange={(e) => { setRole(e.target.value) }}>

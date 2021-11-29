@@ -31,9 +31,6 @@ export default function Products(props) {
   function resetControls() {
     setName("");
     setDescription("");
-    setPrice(null);
-    SetSellPrice(null)
-    setQuantity(null)
     setFile(null);
   }
   const onFileChange = (e) => {
@@ -71,6 +68,9 @@ export default function Products(props) {
         price: price,
         sellPrice: sellPrice
       }).then((res) => {
+        setPrice(null);
+        SetSellPrice(null);
+        setQuantity(null);
         onUpload(name);
       })
 

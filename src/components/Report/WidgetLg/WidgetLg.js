@@ -14,7 +14,9 @@ export default function WidgetLg() {
     date: "",
     status: "",
     total: 0,
-    products: []
+    products: [],
+    ITBIS: 0,
+    descueneto: 0,
   }]);
 
   useEffect(() => {
@@ -86,18 +88,36 @@ export default function WidgetLg() {
                       <td>{item.name}</td>
                       <td> {item.sellPrice} </td>
                       <td>{item.quantity}</td>
-                      <td>{total.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</td>
+                      <td>{total.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</td>
                     </tr>);
                 })
               }
             </tbody>
           </table>
-          <table className="table" style={{ marginTop: "0px" }}>
+          <table className="table" style={{ marginTop: "0px", marginBottom: "0px" }}>
+            <tbody>
+              <tr>
+                <td style={{ width: "226.86px", textAlign: "left" }}><b>ITBIS:</b></td>
+                <td>&nbsp;</td>
+                <td style={{ width: "120.73px" }}><b>{orderList.ITBIS ? orderList.ITBIS.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') : 0.00}</b></td>
+              </tr>
+            </tbody>
+          </table>
+          <table className="table" style={{ marginTop: "0px",  marginBottom: "0px" }}>
+            <tbody>
+              <tr>
+                <td style={{ width: "226.86px", textAlign: "left" }}><b>Descuento:</b></td>
+                <td>&nbsp;</td>
+                <td style={{ width: "120.73px" }}><b>{orderList.descuento ? orderList.descuento.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') : 0.00}</b></td>
+              </tr>
+            </tbody>
+          </table>
+          <table className="table" style={{ marginTop: "0px",  marginBottom: "0px"}}>
             <tbody>
               <tr>
                 <td style={{ width: "226.86px", textAlign: "left" }}><b>Total:</b></td>
                 <td>&nbsp;</td>
-                <td style={{ width: "120.73px" }}><b>{orderList.total ? orderList.total.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') : 0}</b></td>
+                <td style={{ width: "120.73px" }}><b>{orderList.total ? orderList.total.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') : 0.00}</b></td>
               </tr>
             </tbody>
           </table>
@@ -123,7 +143,7 @@ export default function WidgetLg() {
                       <span className="widgetLgName">{item.customer} </span>
                     </td>
                     <td className="widgetLgDate">{timeShow(item.date)}</td>
-                    <td className="widgetLgAmount">{item.total.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</td>
+                    <td className="widgetLgAmount">{item.total.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</td>
                     <td className="widgetLgStatus">{item.status}</td>
                     <td title="info" data-toggle="tooltip" type="button" onClick={() => { detail(item) }}><i className="material-icons">info</i></td>
                     {item.status !== "Eliminada" ? <td title="delete" data-toggle="tooltip" type="button" onClick={() => { deleteOrder(item) }}><i className="material-icons">delete</i></td> : null}

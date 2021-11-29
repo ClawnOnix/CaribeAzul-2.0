@@ -26,7 +26,9 @@ export default function Order() {
         pMethod: 'none',
         gTotal: 0,
         deletedOrderItemIds: '',
-        orderDetails: []
+        orderDetails: [],
+        ITBIS: 0.00,
+        descuento: 0.00
     })
     
     

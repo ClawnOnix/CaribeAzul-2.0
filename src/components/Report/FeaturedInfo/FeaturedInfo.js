@@ -41,7 +41,7 @@ export default function FeaturedInfo() {
 
     if(daysDifference < 30){
       let gtotal = 0;
-      return gtotal += parseFloat(item.total);
+      return gtotal += parseFloat(item.total.toString());
     }
     else{
       return 0;
@@ -66,7 +66,8 @@ export default function FeaturedInfo() {
   };
 
   const sumarizeMonth = () => {
-    if(totalMonth[0] === 0){
+    if(totalMonth[1] === 0){
+      console.log(totalMonth)
       return 0;
     }
     else{
@@ -88,7 +89,7 @@ export default function FeaturedInfo() {
   };
 
   function Compare() {
-    if(Number(sumarize) > Number(invSumarize)){
+    if(parseInt(sumarize().toFixed(2)) > parseInt(invSumarize().toFixed(2))){
     return <ArrowUpward className="featuredIcon positive"/>
     }
     else{ return <ArrowDownward className="featuredIcon negative"/>}
