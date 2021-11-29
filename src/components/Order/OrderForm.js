@@ -47,7 +47,7 @@ export default function OrderForm(props) {
     useEffect(() => {
 
         let gTotal = values.orderDetails.reduce((tempTotal, product) => {
-            return tempTotal + (product.quantity * product.price);
+            return tempTotal + (product.quantity * product.sellPrice);
         }, 0);
         setValues({
             ...values,

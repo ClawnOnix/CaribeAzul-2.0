@@ -88,7 +88,7 @@ export default function FeaturedInfo() {
   };
 
   function Compare() {
-    if(parseFloat(sumarize) >= parseFloat(invSumarize)){
+    if(Number(sumarize) > Number(invSumarize)){
     return <ArrowUpward className="featuredIcon positive"/>
     }
     else{ return <ArrowDownward className="featuredIcon negative"/>}

@@ -78,11 +78,11 @@ export default function WidgetLg() {
               </tr>
               {
                 product.map((item, index) => {
-                  let total = item.price * item.quantity;
+                  let total = item.sellPrice * item.quantity;
                   return (
                     <tr key={index}>
                       <td>{item.name}</td>
-                      <td> {item.price} </td>
+                      <td> {item.sellPrice} </td>
                       <td>{item.quantity}</td>
                       <td>{total.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</td>
                     </tr>);

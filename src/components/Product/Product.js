@@ -36,7 +36,8 @@ export default function Product(props) {
           <Card.Img style={{width: "150px", height: "100px"}} src={image !== "undefined" && image !== "null" ? image : "https://cdn.pixabay.com/photo/2015/05/31/15/07/coffee-792113_960_720.jpg"}  />
           <Card.Text>{product.description}</Card.Text>
           <Card.Text>{product.quantity} Disp.</Card.Text>
-          <Card.Text>{product.price.toFixed(2)} DOP / Unidad</Card.Text>
+          <Card.Text>Precio de compra: {product.price.toFixed(2)} DOP / Unidad</Card.Text>
+          <Card.Text>Precio de venta: {product.sellPrice.toFixed(2)} DOP / Unidad</Card.Text>
           <Button className="btn1" onClick={() => deleteProduct(product.id)}>
             Eliminar producto
           </Button>

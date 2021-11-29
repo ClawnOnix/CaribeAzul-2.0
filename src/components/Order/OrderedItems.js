@@ -109,7 +109,7 @@ export default function OrderedItems(props) {
                                             >+</Button>
                                         </ButtonGroup>
                                         <span className={classes.totalPerItem}>
-                                            {'$' + roundTo2DecimalPoint(product.quantity * product.price)}
+                                            {'$' + roundTo2DecimalPoint(product.quantity * product.sellPrice)}
                                         </span>
                                     </>
                                 }

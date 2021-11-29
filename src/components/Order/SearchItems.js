@@ -71,7 +71,7 @@ export default function SearchItems(props) {
             orderDetailId: 0,
             id: Item.id,
             quantity: 1,
-            price: Item.price,
+            sellPrice: Item.sellPrice,
             name: Item.name
         }
         setValues({
@@ -100,7 +100,7 @@ export default function SearchItems(props) {
                             onClick={e => addItem(item)}>
                             <ListItemText
                                 primary={item.name}
-                                secondary={'$' + item.price} />
+                                secondary={'$' + item.sellPrice} />
                             <ListItemSecondaryAction>
                                 <IconButton onClick={e => addItem(item)}>
                                     <PlusOneIcon />
