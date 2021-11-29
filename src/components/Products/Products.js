@@ -39,6 +39,7 @@ export default function Products(props) {
   }
 
   const onUpload = async (name) => {
+    resetControls();
     const storageRef = storage.ref()
     const fileRef = storageRef.child(name)
     await fileRef.put(file)
@@ -48,7 +49,7 @@ export default function Products(props) {
         url: await fileRef.getDownloadURL()
       })
     }).then(() => {
-      resetControls();
+
       getProduct();
       toast.success("El Producto se ha añadido");
     })
@@ -58,7 +59,7 @@ export default function Products(props) {
 
     price = parseFloat(price);
     quantity = parseFloat(quantity);
-    if ((name !== "" || description !== "") || (price > 0 || quantity > 0)) {
+    if ((name !== "" && description !== "") && (price != null && quantity != null) && (price > 0 && quantity > 0)) {
 
       setLoading(true);
       Axios.post("https://caribeazul-backend-muvy3.ondigitalocean.app/newproduct", {
