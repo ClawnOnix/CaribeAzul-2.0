@@ -37,7 +37,7 @@ export default function Product(props) {
           <Card.Text>{product.description}</Card.Text>
           <Card.Text>{product.quantity} Disp.</Card.Text>
           <Card.Text>Precio de compra: {product.price.toFixed(2)} DOP / Unidad</Card.Text>
-          <Card.Text>Precio de venta: {product.sellPrice.toFixed(2)} DOP / Unidad</Card.Text>
+          <Card.Text style={{marginLeft: "20px"}}>Precio de venta: {product.sellPrice.toFixed(2)} DOP / Unidad</Card.Text>
           <Button className="btn1" onClick={() => deleteProduct(product.id)}>
             Eliminar producto
           </Button>
