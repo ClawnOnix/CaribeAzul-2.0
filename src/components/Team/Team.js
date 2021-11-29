@@ -51,13 +51,17 @@ function Team() {
   };
 
   function updateUser(id){
-  Axios.put(`https://caribeazul-backend-muvy3.ondigitalocean.app/update`).then((response) => {
-      setUserList(
-        userList.filter((val) => {
-          return val.id !== id;
-        })
-      );
+  Axios.put(`https://caribeazul-backend-muvy3.ondigitalocean.app/update`, {
+    id: id,
+    username: username,
+    password: password,
+    role: role 
+  }).then((res) => {
+    console.log(res)
+    if (res === 200){
+      getUser()
       handleClose2()
+    }
     });
   }
 
@@ -204,7 +208,7 @@ function Team() {
                     ))}
                   </select>
                 </div>
-                <Button type="button" className="button" onClick={() => {updateUser()}}>Actualizar</Button>
+                <Button type="button" className="button" onClick={() => {updateUser(userUpdate.id)}}>Actualizar</Button>
               </form>
             </Modal.Body>
 
