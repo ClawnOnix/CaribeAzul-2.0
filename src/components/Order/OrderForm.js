@@ -73,6 +73,7 @@ export default function OrderForm(props) {
         let temp = {};
         temp.customer = values.customer !== "" ? "" : "Este campo es requerido.";
         temp.pMethod = values.pMethod !== "none" ? "" : "Este campo es requerido.";
+        temp.gTotal = values.gTotal !== 0 ? "" : "Elige los productos.";
         temp.orderDetails = values.orderDetails.length !== 0 ? "" : "Este campo es requerido.";
         setErrors({ ...temp });
         return Object.values(temp).every(x => x === "");
@@ -94,7 +95,7 @@ export default function OrderForm(props) {
                 ITBIS = Math.floor(values.gTotal * 18) / 100;
                 gtotal = values.gTotal + ITBIS;
             }
-            if( values.descuento !== null && values.descuento > 0 ) {
+            if (values.descuento !== null && values.descuento > 0) {
                 gtotal = gtotal - values.descuento;
             }
             Axios.post("https://caribeazul-backend-muvy3.ondigitalocean.app/neworder", {
@@ -116,14 +117,44 @@ export default function OrderForm(props) {
 
     }
 
-    function updateProductQuantity(details) {
-        details.map((item) => (
-            Axios.put(`https://caribeazul-backend-muvy3.ondigitalocean.app/updateproductquantity`, {
-                id: item.id,
-                quantity: item.quantity,
-            }).then((res) => {
-            })//.catch(err => toast.error("Orden Creada! porfavor conctactar al administrador!"))
-        ))     
+    function updateProductQuantity([details]) {
+        let getProducts = []
+        console.log("aqui llega")
+        Axios.get("https://caribeazul-backend-muvy3.ondigitalocean.app/productlist").then((response) => {
+            getProducts = response.data;
+        });
+        console.log("aqui ya no")
+        details.map((item) => {
+            return getProducts.map( (items) => {
+                console.log(item.id)
+                console.log(items.id)
+                 if (item.id === items.id) {
+                    const resta = items.quantity - item.quantity;
+
+                    console.log("aqui llegue")
+                    if (resta > 0) {
+                        console.log("aqui x2")
+                         Axios.put(`https://caribeazul-backend-muvy3.ondigitalocean.app/updateproduct`, {
+                            id: item.id,
+                            quantity: resta,
+
+                        }).then((res) => {
+                             console.log(res)
+                        });
+                    }
+                    if (resta > 0) {
+                        Axios.put(`https://caribeazul-backend-muvy3.ondigitalocean.app/updateproduct`, {
+                            id: item.id,
+                            quantity: resta,
+
+                        }).then((res) => {
+                             console.log(res)
+                        });
+                    }
+                 
+                }
+            })
+        })
     }
 
     const openListOfOrders = () => {
@@ -168,6 +199,7 @@ export default function OrderForm(props) {
                             error={errors.pMethod}
                         />
                         <Input
+                            type="number"
                             label="Descuento"
                             name="descuento"
                             value={values.descuento}

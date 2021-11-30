@@ -22,16 +22,16 @@ export default function Products(props) {
   const [loading, setLoading] = useState(true);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [price, setPrice] = useState(null);
-  const [sellPrice, SetSellPrice] = useState(null);
-  const [quantity, setQuantity] = useState(null);
-  const [file, setFile] = useState(null)
+  const [price, setPrice] = useState("");
+  const [sellPrice, SetSellPrice] = useState("");
+  const [quantity, setQuantity] = useState("");
+  const [file, setFile] = useState(undefined)
 
 
   function resetControls() {
     setName("");
     setDescription("");
-    setFile(null);
+    setFile(undefined);
   }
   const onFileChange = (e) => {
     setFile(e.target.files[0])
@@ -68,9 +68,9 @@ export default function Products(props) {
         price: price,
         sellPrice: sellPrice
       }).then((res) => {
-        setPrice(null);
-        SetSellPrice(null);
-        setQuantity(null);
+        setPrice("");
+        SetSellPrice("");
+        setQuantity("");
         onUpload(name);
       })
 
