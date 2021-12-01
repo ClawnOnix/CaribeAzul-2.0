@@ -32,4 +32,14 @@
           box-shadow: none !important;
         }
     }
+    .file{
+        &:hover,
+        &:active,
+        &:focus {
+          background-color: #0098d3 !important;
+          border-color: #0098d3;
+          color: #fff;
+          box-shadow: none !important;
+        }
+    }
 }
