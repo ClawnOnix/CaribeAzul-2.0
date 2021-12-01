@@ -120,7 +120,7 @@ export default function Products(props) {
           <Input type="number" style={{ width: "15%", marginLeft: "10px" }} value={price} placeholder="Precio" Iprops={{ style: { height: "40px", borderRadius: "10px" } }} onChange={(e) => setPrice(e.target.value)} />
           <Input type="number" style={{ width: "15%", marginTop: "15px" }} value={sellPrice} placeholder="Precio D. Venta" Iprops={{ style: { height: "40px", borderRadius: "10px" } }} onChange={(e) => SetSellPrice(e.target.value)} />
           <Input type="number" style={{ width: "12%", marginLeft: "10px", marginTop: "15px" }} value={quantity} placeholder="cant." Iprops={{ style: { height: "40px", borderRadius: "10px" } }} onChange={(e) => setQuantity(e.target.value)} />
-          <input type="file" style={{ width: "198px", marginLeft: "1px", backgroundColor: "##00FF40", marginTop: "16px" }} onChange={onFileChange}></input>
+          <input type="file" style={{ width: "198px", marginLeft: "1px", backgroundColor: "##00FF40", marginTop: "16px" }} placeholder="Seleccionar Imagen" onChange={onFileChange}></input>
           <Button className="button" style={{ width: "20%", marginLeft: "10px" }} startIcon={<AddIcon />} onClick={() => { addProducts(name, description, price, quantity, sellPrice) }}>añadir producto</Button>
         </div>
       </Container>
