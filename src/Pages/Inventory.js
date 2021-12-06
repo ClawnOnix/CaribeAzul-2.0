@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import React, { useEffect } from "react";
+import { ToastContainer } from "react-toastify";
 import Products from "../components/Products";
 import Navbar from '../components/SideBar/Navbar';
 import { useHistory } from "react-router-dom";
