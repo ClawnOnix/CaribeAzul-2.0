@@ -108,7 +108,7 @@ export default function OrderForm(props) {
                 ITBIS: ITBIS,
                 descuento: values.descuento
             }).then(res => {
-                updateProductQuantity(values.orderDetails)
+                
                 resetFormControls();
                 setNotify({ isOpen: true, message: 'Se ha creado la nueva orden' });
             }).catch(err => toast.error("Error al Crear orden"));
@@ -117,45 +117,45 @@ export default function OrderForm(props) {
 
     }
 
-    function updateProductQuantity([details]) {
-        let getProducts = []
-        console.log("aqui llega")
-        Axios.get("https://caribeazul-backend-muvy3.ondigitalocean.app/productlist").then((response) => {
-            getProducts = response.data;
-        });
-        console.log("aqui ya no")
-        details.map((item) => {
-            return getProducts.map( (items) => {
-                console.log(item.id)
-                console.log(items.id)
-                 if (item.id === items.id) {
-                    const resta = items.quantity - item.quantity;
+    // function updateProductQuantity([details]) {
+    //     let getProducts = []
+    //     console.log("aqui llega")
+    //     Axios.get("https://caribeazul-backend-muvy3.ondigitalocean.app/productlist").then((response) => {
+    //         getProducts = response.data;
+    //     });
+    //     console.log("aqui ya no")
+    //     details.map((item) => {
+    //         return getProducts.map( (items) => {
+    //             console.log(item.id)
+    //             console.log(items.id)
+    //              if (item.id === items.id) {
+    //                 const resta = items.quantity - item.quantity;
 
-                    console.log("aqui llegue")
-                    if (resta > 0) {
-                        console.log("aqui x2")
-                         Axios.put(`https://caribeazul-backend-muvy3.ondigitalocean.app/updateproduct`, {
-                            id: item.id,
-                            quantity: resta,
+    //                 console.log("aqui llegue")
+    //                 if (resta > 0) {
+    //                     console.log("aqui x2")
+    //                      Axios.put(`https://caribeazul-backend-muvy3.ondigitalocean.app/updateproductquantity`, {
+    //                         id: item.id,
+    //                         quantity: resta,
 
-                        }).then((res) => {
-                             console.log(res)
-                        });
-                    }
-                    if (resta > 0) {
-                        Axios.put(`https://caribeazul-backend-muvy3.ondigitalocean.app/updateproduct`, {
-                            id: item.id,
-                            quantity: resta,
+    //                     }).then((res) => {
+    //                          console.log(res)
+    //                     });
+    //                 }
+    //                 if (resta > 0) {
+    //                     Axios.put(`https://caribeazul-backend-muvy3.ondigitalocean.app/updateproductquantity`, {
+    //                         id: item.id,
+    //                         quantity: resta,
 
-                        }).then((res) => {
-                             console.log(res)
-                        });
-                    }
+    //                     }).then((res) => {
+    //                          console.log(res)
+    //                     });
+    //                 }
                  
-                }
-            })
-        })
-    }
+    //             }
+    //         })
+    //     })
+    // }
 
     const openListOfOrders = () => {
         setOrderListVisibility(true);
